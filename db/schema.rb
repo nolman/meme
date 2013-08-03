@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803155422) do
+ActiveRecord::Schema.define(version: 20130803175646) do
+
+  create_table "meme_captions", force: true do |t|
+    t.string   "upper_caption"
+    t.string   "lower_caption"
+    t.string   "font"
+    t.integer  "meme_image_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "meme_captions", ["meme_image_id"], name: "index_meme_captions_on_meme_image_id", using: :btree
 
   create_table "meme_images", force: true do |t|
     t.string   "name"

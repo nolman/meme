@@ -36,7 +36,7 @@ class MemeImagesController < ApplicationController
   def destroy
     @meme_image.destroy
     respond_to do |format|
-      format.html { redirect_to memes_url }
+      format.html { redirect_to meme_images_path }
     end
   end
 

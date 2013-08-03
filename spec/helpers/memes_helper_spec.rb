@@ -1,4 +1,4 @@
 require 'spec_helper'
 
-describe MemeHelper do
+describe MemesHelper do
 end

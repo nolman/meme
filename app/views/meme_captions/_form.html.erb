@@ -1,0 +1,25 @@
+<%= form_for @meme_caption, url: form_url, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :upper_caption, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :upper_caption, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :lower_caption, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lower_caption, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :font, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :font, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                meme_image_meme_captions_path(@meme_image), :class => 'btn' %>
+  </div>
+<% end %>
