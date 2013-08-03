@@ -8,10 +8,16 @@ class MemeUploader < CarrierWave::Uploader::Base
 
   process :set_content_type
   storage :file
-  process :resize_to_limit => [640, 960]
+  version :default do
+    process :resize_to_limit => [640, 960]
+  end
 
   version :thumb do
     process :resize_to_limit => [50, 50]
+  end
+
+  version :mini do
+    process :resize_to_limit => [200, 200]
   end
 
   def store_dir
