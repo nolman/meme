@@ -14,7 +14,7 @@ class MemeCaptionsController < ApplicationController
     @meme_caption = @meme_image.meme_captions.build(meme_caption_params)
     respond_to do |format|
       if @meme_caption.save
-        format.html { redirect_to meme_image_path(@meme_image), notice: 'Meme Caption was successfully created.' }
+        format.html { redirect_to meme_image_meme_caption_path(@meme_image, @meme_caption), notice: 'Meme Caption was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -23,8 +23,8 @@ class MemeCaptionsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @meme_caption.update(meme_image_params)
-        format.html { redirect_to meme_image_meme_caption_path(@meme_image), notice: 'Meme Caption was successfully updated.' }
+      if @meme_caption.update(meme_caption_params)
+        format.html { redirect_to meme_image_meme_caption_path(@meme_image, @meme_caption), notice: 'Meme Caption was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
@@ -34,7 +34,7 @@ class MemeCaptionsController < ApplicationController
   def destroy
     @meme_caption.destroy
     respond_to do |format|
-      format.html { redirect_to meme_image_path(@meme_image) }
+      format.html { redirect_to meme_image_meme_captions_path(@meme_image) }
     end
   end
 

@@ -15,6 +15,7 @@
         <td><%= meme_image.name %></td>
         <td><%= image_tag meme_image.meme_url %></td>
         <td>
+          <%= link_to "Captions", meme_image_meme_captions_path(meme_image) %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_meme_image_path(meme_image), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

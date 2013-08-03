@@ -34,12 +34,27 @@ describe MemeCaptionsController do
   end
 
   describe "POST create" do
-    it "creates a meme caption for an image"
+    it "creates a meme caption for an image" do
+      expect {
+        post :create, valid_attributes.merge(meme_caption: {upper_caption: "hello world", lower_caption: "hello world2"}), valid_session
+        response.should redirect_to(meme_image_meme_caption_path(meme_image, meme_image.meme_captions.last))
+      }.to change(meme_image.meme_captions, :count).by(1)
+    end
   end
   describe "PUT update" do
-    it "updates a meme caption for an image"
+    it "updates a meme caption for an image" do
+      expect {
+        put :update, valid_attributes.merge(id: meme_caption.id, meme_caption: {upper_caption: "new"}), valid_session
+        response.should redirect_to(meme_image_meme_caption_path(meme_image, meme_caption))
+      }.to change{ meme_caption.reload.upper_caption }.from(meme_caption.upper_caption).to("new")
+    end
   end
   describe "DELETE destroy" do
-    it "destroys a meme caption for an image"
+    it "destroys a meme caption for an image" do
+      expect {
+        delete :destroy, valid_attributes.merge(id: meme_caption.id), valid_session
+        response.should redirect_to(meme_image_meme_captions_path(meme_image))
+      }.to change(meme_image.meme_captions, :count).by(-1)
+    end
   end
 end
