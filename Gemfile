@@ -13,15 +13,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
 group :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 2.0'
