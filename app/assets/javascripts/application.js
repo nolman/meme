@@ -56,8 +56,8 @@ $(function(){
   $("canvas.meme").each(function(index, element){
     var canvas = element;
     var image_url = $(element).attr("image_src");
-    var caption_upper = $(element).attr("upper_caption");
-    var caption_lower = $(element).attr("lower_caption");
+    var caption_upper = $(element).attr("upper_caption") || "";
+    var caption_lower = $(element).attr("lower_caption") || "";
     var image = new Image();
 
     image.onload = function() {
