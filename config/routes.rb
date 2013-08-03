@@ -1,4 +1,4 @@
 Meme::Application.routes.draw do
-  root 'memes#index'
-  resources :memes
+  root 'meme_images#index'
+  resources :meme_images
 end

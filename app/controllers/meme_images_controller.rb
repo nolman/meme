@@ -1,4 +1,4 @@
-class MemesController < ApplicationController
+class MemeImagesController < ApplicationController
   before_action :set_meme_image, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -16,7 +16,7 @@ class MemesController < ApplicationController
     @meme_image = MemeImage.new(meme_image_params)
     respond_to do |format|
       if @meme_image.save
-        format.html { redirect_to meme_path(@meme_image), notice: 'Meme was successfully created.' }
+        format.html { redirect_to meme_image_path(@meme_image), notice: 'Meme was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -26,7 +26,7 @@ class MemesController < ApplicationController
   def update
     respond_to do |format|
       if @meme_image.update(meme_image_params)
-        format.html { redirect_to meme_path(@meme_image), notice: 'Meme was successfully updated.' }
+        format.html { redirect_to meme_image_path(@meme_image), notice: 'Meme was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end

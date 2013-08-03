@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe MemesController do
+describe MemeImagesController do
   render_views
 
   let(:valid_session) {  }
@@ -20,7 +20,7 @@ describe MemesController do
     it "creates a meme" do
       expect {
         post :create, {meme_image: {name: "hello world", meme: test_image}}, valid_session
-        response.should redirect_to(meme_path(MemeImage.last))
+        response.should redirect_to(meme_image_path(MemeImage.last))
       }.to change(MemeImage, :count).by(1)
     end
   end
@@ -29,7 +29,7 @@ describe MemesController do
     it "updates a meme" do
       expect {
         put :update, {id: meme_image.id, meme_image: {name: "new name"}}, valid_session
-        response.should redirect_to(meme_path(meme_image))
+        response.should redirect_to(meme_image_path(meme_image))
       }.to change {meme_image.reload.name}.from(meme_image.name).to("new name")
     end
   end
@@ -38,7 +38,7 @@ describe MemesController do
     it "deletes a meme image" do
       expect {
         delete :destroy, {id: meme_image.to_param}, valid_session
-        response.should redirect_to(memes_path)
+        response.should redirect_to(meme_images_path)
       }.to change(MemeImage, :count).by(-1)
     end
   end
