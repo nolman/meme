@@ -3,17 +3,9 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:upper_caption) %>:</strong></dt>
-  <dd><%= @meme_caption.upper_caption %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lower_caption) %>:</strong></dt>
-  <dd><%= @meme_caption.lower_caption %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:font) %>:</strong></dt>
-  <dd><%= @meme_caption.font %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:meme_image_id) %>:</strong></dt>
-  <dd><%= @meme_caption.meme_image_id %></dd>
-</dl>
-
+<div>
+  <%= draw_meme(@meme_caption) %>
+</div>
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               meme_image_meme_captions_path(@meme_image), :class => 'btn'  %>

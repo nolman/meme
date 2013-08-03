@@ -1,14 +1,17 @@
 <%= form_for @meme_caption, url: form_url, :html => { :class => 'form-horizontal' } do |f| %>
+  <div>
+    <%= draw_meme(@meme_caption) %>
+  </div>
   <div class="control-group">
     <%= f.label :upper_caption, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :upper_caption, :class => 'text_field' %>
+      <%= f.text_field :upper_caption, :class => 'meme caption-upper' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :lower_caption, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :lower_caption, :class => 'text_field' %>
+      <%= f.text_field :lower_caption, :class => 'meme caption-lower' %>
     </div>
   </div>
   <div class="control-group">

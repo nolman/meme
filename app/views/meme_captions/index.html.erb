@@ -17,7 +17,7 @@
   <tbody>
     <% @meme_captions.each do |meme_caption| %>
       <tr>
-        <td><%= link_to meme_caption.id, meme_image_meme_caption_path(@meme_image, @meme_caption) %></td>
+        <td><%= link_to meme_caption.id, meme_image_meme_caption_path(@meme_image, meme_caption) %></td>
         <td><%= meme_caption.upper_caption %></td>
         <td><%= meme_caption.lower_caption %></td>
         <td><%= meme_caption.font %></td>
@@ -25,9 +25,9 @@
         <td><%=l meme_caption.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_meme_image_meme_caption_path(@meme_image, @meme_caption), :class => 'btn btn-mini' %>
+                      edit_meme_image_meme_caption_path(@meme_image, meme_caption), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      edit_meme_image_meme_caption_path(@meme_image, @meme_caption),
+                      edit_meme_image_meme_caption_path(@meme_image, meme_caption),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
