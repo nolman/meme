@@ -17,7 +17,7 @@
 //= require_tree .
 
 $(function(){
-  function write_meme(canvas, image, caption_upper, caption_lower){
+  function write_meme(canvas, image, ratio, caption_upper, caption_lower){
     canvas.width = image.width;
     canvas.height = image.height;
     var context = canvas.getContext('2d');
@@ -29,13 +29,14 @@ $(function(){
     context.fillStyle="#FFFFFF";
     context.lineStyle="#000000";
     context.textBaseline = 'top';
-    write_caption(context, caption_upper, image.width, 0)
+    write_caption(context, caption_upper, ratio, image.width, 0)
     context.textBaseline = 'bottom';
-    write_caption(context, caption_lower, image.width, image.height)
+    write_caption(context, caption_lower, ratio, image.width, image.height)
   }
 
-  function write_caption(context, text, width, y) {
-    var size = 70;
+  function write_caption(context, text, ratio, width, y) {
+    console.log(ratio)
+    var size = 70 * ratio;
     var lines = [text];
     var side_padding = 20;
     do {
@@ -58,16 +59,17 @@ $(function(){
     var image_url = $(element).attr("image_src");
     var caption_upper = $(element).attr("upper_caption") || "";
     var caption_lower = $(element).attr("lower_caption") || "";
+    var ratio = $(element).attr("ratio");
     var image = new Image();
 
     image.onload = function() {
-      write_meme(canvas, image, caption_upper, caption_lower);
+      write_meme(canvas, image, ratio, caption_upper, caption_lower);
     };
     image.src = image_url;
     var upper_input = $(".caption-upper");
     var lower_input = $(".caption-lower");
     $("input.meme").on("keyup", function(){
-      write_meme(canvas, image, upper_input.val(), lower_input.val());
+      write_meme(canvas, image, ratio, upper_input.val(), lower_input.val());
     });
   });
 

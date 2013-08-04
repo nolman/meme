@@ -1,0 +1,13 @@
+<% @meme_images.each_slice(4) do |slice| %>
+  <div class="row-fluid">
+    <% slice.each do |meme_image| %>
+      <div class="span3">
+        <p>
+          <%= link_to caption_meme_path(meme_image) do %>
+            <%= image_tag meme_image.meme_url(:mini) %>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
+gem 'kaminari'
 
 group :doc do
   gem 'sdoc', require: false

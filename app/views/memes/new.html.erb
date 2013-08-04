@@ -1,4 +1,4 @@
-<%= form_for meme_image, url: form_url, html: {multipart: true} do |f| %>
+<%= form_for @meme_image, url: upload_memes_path, html: {multipart: true} do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
@@ -11,10 +11,9 @@
       <%= f.file_field :meme, :class => 'text_field' %>
     </div>
   </div>
-
-  <div class="form-actions">
+  <div class="control-group">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                meme_images_path, :class => 'btn' %>
+                upload_memes_path, :class => 'btn' %>
   </div>
 <% end %>

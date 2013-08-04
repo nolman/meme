@@ -1,28 +1,22 @@
-<%= form_for @meme_caption, url: form_url, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @meme_caption, url: caption_meme_path(@meme_image), :html => { :class => 'form-horizontal' } do |f| %>
   <div>
     <%= draw_meme(@meme_caption) %>
   </div>
   <div class="control-group">
-    <%= f.label :upper_caption, :class => 'control-label' %>
+    <%= f.label :upper_caption, :Upper, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :upper_caption, :class => 'meme caption-upper' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :lower_caption, :class => 'control-label' %>
+    <%= f.label :lower_caption, :Lower, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :lower_caption, :class => 'meme caption-lower' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :font, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :font, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                meme_image_meme_captions_path(@meme_image), :class => 'btn' %>
+                caption_meme_path(@meme_image), :class => 'btn' %>
   </div>
 <% end %>
