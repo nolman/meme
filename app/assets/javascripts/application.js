@@ -23,11 +23,11 @@ $(function(){
     var context = canvas.getContext('2d');
     context.clearRect(0, 0, image.width, image.height);
     context.drawImage(image, 0, 0);
-    context.lineWidth=2;
-    context.textAlign="center"
-    context.lineCap="round"
-    context.fillStyle="#FFFFFF";
-    context.lineStyle="#000000";
+    context.lineWidth = 2;
+    context.textAlign = "center"
+    context.lineCap = "round"
+    context.fillStyle = "#FFFFFF";
+    context.lineStyle = "#000000";
     context.textBaseline = 'top';
     write_caption(context, caption_upper, ratio, image.width, 0)
     context.textBaseline = 'bottom';
@@ -35,23 +35,15 @@ $(function(){
   }
 
   function write_caption(context, text, ratio, width, y) {
-    console.log(ratio)
     var size = 70 * ratio;
-    var lines = [text];
-    var side_padding = 20;
+    var side_padding = 20 * ratio;
     do {
       size--;
       context.font = size + 'px Impact';
       context.lineWidth = size / 32;
-    } while(context.measureText(lines[0]).width > (width-side_padding));
-    $.each(lines, function(index, line){
-      var offset = index * (size + 3);
-      if(context.textBaseline == "bottom"){
-        offset *= -1;
-      }
-      context.fillText(text, width/2, y + offset);
-      context.strokeText(text, width/2, y + offset);
-    });
+    } while(context.measureText(text).width > (width-side_padding));
+    context.fillText(text, width/2, y);
+    context.strokeText(text, width/2, y);
   }
 
   $("canvas.meme").each(function(index, element){
