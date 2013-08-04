@@ -11,3 +11,4 @@ Rails based Meme generator using HTML5 canvas.
     $ ./bin/bootstrap
     $ bundle
     $ rake db:create db:migrate
+    $ rackup
