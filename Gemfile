@@ -12,6 +12,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'twitter-bootstrap-rails'
 gem 'kaminari'
+gem 'puma'
 
 group :doc do
   gem 'sdoc', require: false
