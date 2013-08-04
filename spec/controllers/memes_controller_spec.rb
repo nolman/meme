@@ -37,6 +37,21 @@ describe MemesController do
     end
   end
 
+  describe "POST caption_meme" do
+    it "creates a caption for a meme" do
+      expect {
+        post :caption_meme, {id: meme_image.id, meme_caption: {upper_caption: "hello world", upper_caption: "test"}}, valid_session
+        response.should redirect_to(meme_path(MemeCaption.last))
+      }.to change(meme_image.meme_captions, :count).by(1)
+    end
+    it "handles validation erorrs" do
+      expect {
+        post :caption_meme, {id: meme_image.id, meme_caption: {upper_caption: "", upper_caption: ""}}, valid_session
+        response.should be_success
+      }.to_not change(meme_image.meme_captions, :count)
+    end
+  end
+
   describe "GET show" do
     it "responds successfully" do
       get :show, {id: FactoryGirl.create(:meme_caption).to_param}, valid_session
