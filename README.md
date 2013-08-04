@@ -1,5 +1,3 @@
-## About
-
 Rails based Meme generator using HTML5 canvas.
 
 ## Dependencies
