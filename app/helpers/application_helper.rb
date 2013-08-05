@@ -6,8 +6,6 @@ module ApplicationHelper
       upper_caption: meme_caption.upper_caption, lower_caption: meme_caption.lower_caption,
       ratio: MemeUploader::IMAGE_RATIOS[image_size],
     }
-    p MemeUploader::IMAGE_RATIOS
-    puts MemeUploader::IMAGE_RATIOS[image_size]
     content_tag :canvas, "", attrs
   end
 end
