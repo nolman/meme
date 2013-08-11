@@ -9,7 +9,7 @@ class MemesController < ApplicationController
 
   def new_caption
     @meme_image = MemeImage.find(params[:id])
-    @meme_caption = @meme_image.meme_captions.build
+    @meme_caption = @meme_image.meme_captions.build(font: '60px Impact')
   end
 
   def images
@@ -49,6 +49,6 @@ class MemesController < ApplicationController
     params.require(:meme_image).permit(:name, :meme)
   end
   def meme_caption_params
-    params.require(:meme_caption).permit(:upper_caption, :lower_caption)
+    params.require(:meme_caption).permit(:upper_caption, :lower_caption, :font)
   end
 end

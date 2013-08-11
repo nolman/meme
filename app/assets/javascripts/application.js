@@ -17,9 +17,12 @@
 //= require_tree .
 
 $(function(){
-  function write_meme(canvas, image, ratio, caption_upper, caption_lower){
+  function write_meme(canvas, image, ratio, caption_upper, caption_lower, font){
     canvas.width = image.width;
     canvas.height = image.height;
+    var font_data = font.split(" ");
+    var font_size = parseInt(font_data.shift().replace("px", "")) * ratio;
+    font_data.unshift(font_size + "px");
     var context = canvas.getContext('2d');
     context.clearRect(0, 0, image.width, image.height);
     context.drawImage(image, 0, 0);
@@ -29,14 +32,14 @@ $(function(){
     context.fillStyle = "#FFFFFF";
     context.lineStyle = "#000000";
     context.textBaseline = 'top';
-    context.font = '60px Impact';
+    context.font = font_data.join(" ");
     context.lineWidth = 2;
-    write_caption(context, caption_upper, ratio, image.width, 0)
+    write_caption(context, caption_upper, ratio, image.width, 0, font_size)
     context.textBaseline = 'bottom';
-    write_caption(context, caption_lower, ratio, image.width, image.height)
+    write_caption(context, caption_lower, ratio, image.width, image.height, font_size)
   }
 
-  function write_caption(context, text, ratio, width, y) {
+  function write_caption(context, text, ratio, width, y, font_size) {
     text = text.replace(/\s+/, " ")
     var width_with_padding = width - (20 * ratio);
     var lines = [text.split(" ")];
@@ -62,9 +65,9 @@ $(function(){
     for(var i=0; i<lines.length; i++){
       var line = lines[i].join(" ");
       if(y == 0){
-        var line_y = y + (i * 60);
+        var line_y = y + (i * font_size);
       } else {
-        var line_y = y - ((lines.length - 1 - i) * 60);
+        var line_y = y - ((lines.length - 1 - i) * font_size);
       }
       context.fillText(line, center, line_y);
       context.strokeText(line, center, line_y);
@@ -76,17 +79,19 @@ $(function(){
     var image_url = $(element).attr("image_src");
     var caption_upper = $(element).attr("upper_caption") || "";
     var caption_lower = $(element).attr("lower_caption") || "";
+    var font = $(element).attr("font") || "60px Impact";
     var ratio = $(element).attr("ratio");
     var image = new Image();
 
     image.onload = function() {
-      write_meme(canvas, image, ratio, caption_upper, caption_lower);
+      write_meme(canvas, image, ratio, caption_upper, caption_lower, font);
     };
     image.src = image_url;
-    var upper_input = $(".caption-upper");
-    var lower_input = $(".caption-lower");
+    var upper_input = $("input.caption-upper");
+    var lower_input = $("input.caption-lower");
+    var font_input = $("input.font");
     $("input.meme").on("keyup", function(){
-      write_meme(canvas, image, ratio, upper_input.val(), lower_input.val());
+      write_meme(canvas, image, ratio, upper_input.val(), lower_input.val(), font_input.val());
     });
   });
 
