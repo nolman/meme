@@ -29,21 +29,46 @@ $(function(){
     context.fillStyle = "#FFFFFF";
     context.lineStyle = "#000000";
     context.textBaseline = 'top';
+    context.font = '60px Impact';
+    context.lineWidth = 2;
     write_caption(context, caption_upper, ratio, image.width, 0)
     context.textBaseline = 'bottom';
     write_caption(context, caption_lower, ratio, image.width, image.height)
   }
 
   function write_caption(context, text, ratio, width, y) {
-    var size = 70 * ratio;
-    var side_padding = 20 * ratio;
-    do {
-      size--;
-      context.font = size + 'px Impact';
-      context.lineWidth = size / 32;
-    } while(context.measureText(text).width > (width-side_padding));
-    context.fillText(text, width/2, y);
-    context.strokeText(text, width/2, y);
+    text = text.replace(/\s+/, " ")
+    var width_with_padding = width - (20 * ratio);
+    var lines = [text.split(" ")];
+    var current_line = 0;
+    var center = width/2;
+
+    while(current_line < lines.length) {
+      while(context.measureText(lines[current_line].join(" ")).width > (width_with_padding)) {
+        //Word is too big for one line
+        if(lines[current_line].length == 1) {
+          break;
+        }
+        var word_to_shift = lines[current_line].pop();
+        if(lines[current_line+1]) {
+          lines[current_line+1].unshift(word_to_shift);
+        } else {
+          lines.push([word_to_shift])
+        }
+      }
+      current_line++;
+    }
+
+    for(var i=0; i<lines.length; i++){
+      var line = lines[i].join(" ");
+      if(y == 0){
+        var line_y = y + (i * 60);
+      } else {
+        var line_y = y - ((lines.length - 1 - i) * 60);
+      }
+      context.fillText(line, center, line_y);
+      context.strokeText(line, center, line_y);
+    }
   }
 
   $("canvas.meme").each(function(index, element){
